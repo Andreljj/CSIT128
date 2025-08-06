@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Game and Weather Forecast</title>
+</head>
+
+<style>
+
+</style>
+
+<script>
+    var score = 0; // set default score to 0
+    var timedelay;
+    var gameStart = false; // set default game start to false
+    var chosenLetter = ''; // store chosen letter once game start
+
+    // Return alphabet selected and shown
+    function getSelected() {
+        if (!gameStart) {
+            chosenLetter = document.getElementById("alphabetListBox").value;
+            document.getElementById("LetterShown").textContent = chosenLetter;
+        }
+    }
+
+    // Start the game
+    function start(action) {
+        var startButton = document.getElementById("start");
+        var alphabetListbox = document.getElementById("alphabetListBox");
+
+        if (action == 0) {
+            if (!gameStart) {
+                resetGame();
+                chosenLetter = document.getElementById("alphabetListBox").value; // Lock in chosen alphabet
+                document.getElementById("LetterShown").textContent = chosenLetter;
+                gameStart = true;
+                alphabetListbox.disabled = true; // Disable changing the alphabet
+                startButton.disabled = true; // Disable the start button
+                timedelay = setInterval(generateRandomLetters, 1000); // 1s delay
+            }
+        }
+        else if (action == 1) {
+            gameStart = false;
+            alphabetListbox.disabled = false; // Enable changing the alphabet
+            startButton.disabled = false; // Enable the start button
+            clearInterval(timedelay);
+        }
+    }
+
+    // Reset the game
+    function resetGame() {
+        score = 0;
+        document.getElementById("current").textContent = 0;
+    }
+
+    // Generate random alphabets
+    function generateRandomLetters() {
+        const alphabets = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        var alpha1, alpha2, alpha3;
+
+        do {
+            alpha1 = alphabets.charAt(Math.floor(Math.random() * alphabets.length));
+            alpha2 = alphabets.charAt(Math.floor(Math.random() * alphabets.length));
+            alpha3 = alphabets.charAt(Math.floor(Math.random() * alphabets.length));
+        } while (alpha1 == alpha2 || alpha1 == alpha3 || alpha2 == alpha3);
+
+        document.getElementById("firstAlp").textContent = alpha1;
+        document.getElementById("secondAlp").textContent = alpha2;
+        document.getElementById("thirdAlp").textContent = alpha3;
+    }
+
+    function handleAlphabetClicked(alphabetClick) {
+        if (gameStart) {
+            var temp1;
+            if (alphabetClick == 1) {
+                temp1 = document.getElementById("firstAlp").textContent;
+            } else if (alphabetClick == 2) {
+                temp1 = document.getElementById("secondAlp").textContent;
+            } else if (alphabetClick == 3) {
+                temp1 = document.getElementById("thirdAlp").textContent;
+            }
+
+            if (temp1 === chosenLetter) {
+                score += 4;
+            } else {
+                score -= 2;
+            }
+
+            document.getElementById("current").textContent = score;
+            generateRandomLetters();
+        }
+    }
+</script>
+
+    
+
+    <!-- Basic Game -->
+    <table border="1" cellpadding="10" cellspacing="0">
+        <tr bgcolor="#ffcba4" style="font-size: 30px;">
+            <th colspan="3">Part 2: Game</th>
+        </tr>
+        <tr bgcolor="lightblue">
+            <td><b>Your chosen alphabet: <span id="LetterShown"></span></b></td>
+            <td style="text-align: center">
+                Pick an alphabet:
+                <select id="alphabetListBox" size="1" onchange="getSelected()">
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="G">G</option>
+                    <option value="H">H</option>
+                    <option value="I">I</option>
+                    <option value="J">J</option>
+                    <option value="K">K</option>
+                    <option value="L">L</option>
+                    <option value="M">M</option>
+                    <option value="N">N</option>
+                    <option value="O">O</option>
+                    <option value="P">P</option>
+                    <option value="Q">Q</option>
+                    <option value="R">R</option>
+                    <option value="S">S</option>
+                    <option value="T">T</option>
+                    <option value="U">U</option>
+                    <option value="V">V</option>
+                    <option value="W">W</option>
+                    <option value="X">X</option>
+                    <option value="Y">Y</option>
+                    <option value="Z">Z</option>
+                </select>
+            </td>
+            <td bgcolor="#FFE4C4" style="text-align: center; font-weight: bold;">
+                <b>Current Score: <span id="current" style="color: red">0</span></b>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" bgcolor="#98FB98" align="center">
+                <button id="start" onclick="start(0)">Start game</button>
+                <button onclick="start(1)">Stop game</button>
+            </td>
+        </tr>
+        <tr style="text-align: center">
+            <td onclick="handleAlphabetClicked(1)" class="clickable">
+                <p><span id="firstAlp" style="color:#1829E3"></span></p>
+            </td>
+            <td onclick="handleAlphabetClicked(2)" class="clickable">
+                <p><span id="secondAlp" style="color:#c45911"></span></p>
+            </td>
+            <td onclick="handleAlphabetClicked(3)" class="clickable">
+                <p><span id="thirdAlp" style="color:#ff00f0"></span></p>
+            </td>
+        </tr>
+    </table><br/>
+
+    <!-- Weather Forecast -->
+    <iframe src="A2.xml" width="850" height="1000"></iframe>
+</body>
+</html>

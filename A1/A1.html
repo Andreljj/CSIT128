@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HTML, CSS, JavaScript Basics</title>
+</head>
+
+<style>
+    #tableA {
+        margin-left: 45px;
+    }
+
+    .error {
+        color: red;
+    }
+</style>
+
+<script>
+
+    //Name
+    function validateName() {
+        var nameBox = document.getElementById("name").value;
+
+        // Check if name is empty or contains numbers (allow letters and special characters)
+        if (nameBox.trim() === "") {
+            document.getElementById("nameError").innerHTML = "Name cannot be empty.";
+            return false;
+        } else if (/[0-9]/.test(nameBox)) {
+            document.getElementById("nameError").innerHTML = "Name does not allow numbers.";
+            return false;
+        } else {
+            document.getElementById("nameError").innerHTML = "";
+            return true;
+        }
+    }
+
+    //Module code
+    function validateModule() {
+        var module = document.getElementById("module").value;
+
+        // Check if the input starts with 3 lowercase letters followed strictly by 3 digits where the first digit cannot be '0'
+        if (!/^[a-z]{3}[1-9]\d{2}$/.test(module)) {
+            document.getElementById("moduleError").innerHTML = 
+            "Must start with 3 lowercase letters followed by 3 digits, where the first digit cannot be '0'.";
+            return false;
+        }
+
+        // Clear any previous error messages if the module is valid
+        document.getElementById("moduleError").innerHTML = "";
+        return true;
+    }
+
+    //Date
+    window.onload = function() {
+        updateDate(); // Update date on window load
+        var form = document.getElementById('myForm');
+        form.addEventListener('reset', function() {
+        setTimeout(updateDate, 0); // Update date after form reset
+        });
+    };
+
+    function updateDate() {
+        var date = new Date(); // Current date & time
+        var dayOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        var monthNames = ["January", "February", "March", "April", "May", "June", "July", 
+        "August", "September", "October", "November", "December"];
+        var stringDate = date.getDate() + " " + monthNames[date.getMonth()] + " " + (date.getFullYear()) 
+        + " " + dayOfWeek[date.getDay()] + " " + formatTime(date);
+        document.getElementById("date").value = stringDate;
+    }
+
+    function formatTime(date) {
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var ampm = hours >= 12 ? "PM" : "AM";
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+
+        return hours + ":" + minutes + " " + ampm;
+    }
+    
+    //Text area validation
+    function validateText() {
+        var message = document.getElementById("textArea").value;
+
+        //To check if is empty
+        if (message.trim() == "") {
+            document.getElementById("messageError").innerHTML = "Cannot be empty.";
+            return false;
+        }
+        document.getElementById("messageError").innerHTML = "";
+        return true;
+    }
+    //Find
+    function toggleReplace(findInput) {
+        var replaceInput = document.getElementById("replace");
+
+        if (findInput.value == "") {
+            replaceInput.disabled = true;
+        } else {
+            replaceInput.disabled = false;
+        }
+    }
+
+    function findAndReplace() {
+        var messageTextArea = document.getElementsByName("text")[0];
+        var findText = document.getElementById("find").value;
+        var replaceText = document.getElementById("replace").value;
+        var regex = new RegExp(findText, "g");  // Ensure the regex is global to replace all occurrences
+        let replacementCount = 0;  // Initialize the replacement count variable
+
+        // Use a function to perform the replacement and update the count
+        var replacedText = messageTextArea.value.replace(regex,
+            function (match) {
+                replacementCount++;
+                return replaceText;
+            }
+        );
+
+        messageTextArea.value = replacedText;
+        document.getElementById("replacementCount").textContent = `Replacements: ${replacementCount}`;
+    }
+
+    function prepareTranslation() {
+        // Set the value of the 'msg' input field to the content of the 'Message' textarea
+        var messageTextArea = document.getElementById("textArea");
+        var messageInput = document.getElementsByName("textArea")[0];
+        messageInput.value = messageTextArea.value;
+    }
+
+    function translateMessage() {
+        // Get the content from textarea
+        var message = document.getElementById("textArea").value;
+
+        // Get the selected source language
+        var selectedSourceLanguage = document.querySelector('select[name="sl"]').value;
+
+        // Get the selected target language
+        var selectedTargetLanguage = document.querySelector('input[name="tl"]:checked').value;
+
+        // Generate the Google Translate URL
+        var translateURL = "https://translate.google.com/?sl=" + selectedSourceLanguage + 
+        "&tl=" + selectedTargetLanguage + "&text=" + encodeURIComponent(message);
+
+        // Open the translation in a new tab
+        window.open(translateURL, "_blank");
+    }
+</script>
+
+<body>
+    <hr>
+    <!-- Hello World Program -->
+    <div>
+        <h1>Hello World program in different languages</h1>
+    </div>
+
+    <ul>
+        <li><a href="#C++">C++</a></li>
+        <li><a href="#C#">C#</a></li>
+        <li><a href="#Python">Python</a></li>
+        <li><a href="#HTML">HTML</a></li>
+    </ul>
+    <hr>
+    <br>
+    <!-- C++ -->
+    <table border="0" cellpadding="10" cellspacing="2">
+        <tr>
+            <td rowspan="1"><a id="C++"><b>C++</a></b></td>
+        </tr>
+        <tr>
+            <td><img src="CPP.png" width="100" align="left" alt="C++"></td>
+            <td><code>#Include &lt;iostream&gt;<br><br>void main ( ) {
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                cout &lt;&lt; "Hello World!" &lt;&lt; endl;
+            <br>}
+        </code>
+            </td>
+        </tr>
+    </table>
+    <hr>
+    <br>
+    <!-- C# -->
+    <table border="0" cellpadding="5" cellspacing="2">
+        <tr>
+            <td rowspan="1"><a id=C#><b>C#</b></a></td>
+        </tr>
+        <tr>
+            <td><img src="CS.png" width="110" align="left" alt="C#"></td>
+            <td>
+                <code>
+                using System;<br><br>class Program<br>{<br>
+                &ensp;&ensp;&ensp;&ensp; static void Main()<br>&nbsp;&nbsp;&nbsp;&nbsp;
+                {<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+                Console.WriteLine("Hello, World!");
+                <br>&emsp;&emsp;&emsp;&emsp;&emsp;}<br>}<br>
+                </code>
+            </td>
+        </tr>
+    </table>
+    <hr>
+    <br>
+    <!-- Python -->
+    <table border="0" cellpadding="10" cellspacing="2">
+        <tr>
+            <td rowspan="1"><a id=Python><b>Python</b></a></td>
+        </tr>
+        <tr>
+            <td><img src="Python-Language.jpg" width="100" align="left" alt="Python"></td>
+            <td>
+                <code># Hello World program in Python<br><br>
+                print("Hello World!")</code>
+            </td>
+        </tr>
+    </table>
+    <hr>
+    <br>
+    <!-- HTML-->
+    <table border="0" cellpadding="10" cellspacing="2">
+        <tr>
+            <td rowspan="1"><a id=HTML><b>HTML</b></a></td>
+        </tr>
+        <tr>
+            <td><img src="HTML.jpg" width="100" align="left"></td>
+            <td>
+                <code>
+                &lt;html&gt;
+                <br>&lt;head&gt;
+                <br>&lt;title&gt;Hello&lt;/title&gt;
+                <br>&lt;/html&gt;
+                <br>&lt;body&gt;
+                <br>Hello World!
+                <br>&lt;/body&gt;
+                <br>&lt;/html&gt;
+            </code>
+            </td>
+        </tr>
+    </table>
+    <hr>
+    <br>
+    
+    <div>
+        <h1>Hyperlink, Paragraph and Table</h1>
+    </div>
+    <table border="0" cellpadding="1" cellspacing="2">
+
+        <tr>
+            <td><b>PLAGARISM</b></td>
+        </tr>
+        <tr>
+            <td>
+                <dd>
+                    Plagarism is treated seriously. If we suspect any work is copied, all students
+                    involved are likely to receive zero
+                    <br>for the entire assignment. Plagiarism has led to students being expelled from the
+                    university.<br>
+                    Please click <a
+                        href="https://www.uow.edu.au/student/support-services/learning-development/plagiarism/"
+                        target="_blank">here</a> to read more about Plagirism.
+                </dd>
+            </td>
+        </tr>
+        <tr>
+            <td><b>ACADEMIC CONSIDERATION</b></td>
+        </tr>
+        <tr>
+            <td>
+                <dd>
+                    We know that life isn't perfect and there may be a time when you can't hand in an assignement on
+                    time,
+                    or make it<br>
+                    to class or an exam. If you find yourself in a situation like this, you may be eligible for Academic
+                    Consideration.<br>
+                    Academic Consideration is designed to help students when they are sick, injured, or where a serious,
+                    uplanned<br>
+                    situation has occurred that has affected their ability to study.<br>
+                    Please click <a href="https://www.uow.edu.au/student/admin/academic-consideration/portal/"
+                        target="_blank">here</a> to read more about Academic Consideration.
+                </dd>
+            </td>
+        </tr>
+        <tr>
+            <td><b>STUDENT SUPPORT ADVISERS</b></td>
+        </tr>
+        <tr>
+            <td>
+                <dd>
+                    If you have an issue or a problem that is affecting your study, then the Student Support Advisers
+                    may be
+                    able to<br>
+                    help. There are Student Support Advisers available to assist students who are studying at all UOW
+                    Campuses and in all UOW Faculties.<br>
+                    Please click <a href="https://www.uow.edu.au/student/support-services/advisers/"
+                        target="_blank">here</a> to read more about Student Support Advisers.<br><br>
+                    Student Support Adviser contact details for Faculty of Engineering and Information Sciences:
+                </dd>
+            </td>
+        </tr>
+        <table id="tableA" border="1" cellpadding="1" cellspacing="1">
+            <tr>
+                <td>
+                    <table border="0">
+                        <tr>
+                            <th align="left">Ann-Maree Smith</th>
+                        </tr>
+                        <tr>
+                            <td>Bld 40:133, Wollongong</td>
+                        </tr>
+                        <tr>
+                            <td>Campus</td>
+                        </tr>
+                        <tr>
+                            <td>(02) 4221 4714</td>
+                        </tr>
+                        <tr>
+                            <td>Mon- Fri</td>
+                        </tr>
+                        <tr>
+                            <td>ams@uow.edu.au</td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table border="0">
+                        <tr>
+                            <th align="left">Mitz Perez</th>
+                        </tr>
+
+                        <tr>
+                            <td>Bld 4:105, Wollongong</td>
+                        </tr>
+                        <tr>
+                            <td>Campus</td>
+                        </tr>
+                        <tr>
+                            <td>(02) 4221 3833</td>
+                        </tr>
+                        <tr>
+                            <td>Mon- Fri</td>
+                        </tr>
+                        <tr>
+                            <td>mperez@uow.edu.au</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <tr>
+            <th><b>DISABILITY SERVICES</b></th>
+        </tr>
+        <dd>
+            <td>
+                Disability Services provide advice and support for students with a disability or health condition. Our
+                aim
+                is to<br>
+                ensure students with a disability to realise their full academic potential. We also provide support for
+                those who are<br>
+                the primary carers for those with a medical condition or disability.<br>
+                Please click <a href="https://www.uow.edu.au/student/support-services/disability/"
+                    target="_blank">here</a>
+                to read more about Disability Services.
+        </dd>
+        </td>
+
+    </table>
+    
+    <!-- Form -->
+    <div>
+        <h1>Form with basic validation</h1>
+    </div>
+    <table border="0">
+        <form>
+            <tr>
+                <td>
+                    <label id="Name">Name:</label>
+                </td>
+                <td>
+                    <input type="text" id="name" onchange="validateName()">
+                    <span id="nameError" class="error"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Module code:</label>
+                </td>
+                <td>
+                    <input type="text" id="module" onchange="validateModule()">
+                    <span id="moduleError" class="error"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Current Date:</label>
+                </td>
+                <td>
+                    <input id="date" type="text" name="date" size="28" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Message:</label>
+                </td>
+                <td>
+                    <textarea name="text" id="textArea" rows="3" cols="20"
+                        onchange="validateText()">Hello 202404</textarea>
+                    <span id="messageError" class="error"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Find:</label>
+                </td>
+                <td>
+                    <input type="text" id="find" oninput="toggleReplace(this)">
+                </td>
+            </tr>
+            <tr>
+                
+                <td>
+                    <label>Replace:</label>
+                </td>
+                <td>
+                    <input type="text" id="replace" disabled>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button type="button" onclick="findAndReplace()">Find & Replace</button>
+                    <span id="replacementCount"></span>
+                </td>
+            </tr>
+            <td>
+                <label>Source language:</label>
+            </td>
+            <td>
+                <br>
+                <select name="sl" multiple>
+                    <option value="en" selected>English</option>
+                    <option value="ms">Malay</option>
+                    <option value="ja">Japanese</option>
+                </select>
+            </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Target language:</label>
+                </td>
+                <td>
+                    <input type="radio" name="tl" value="zh-CN" checked>Chinese
+                    <input type="radio" name="tl" value="ja">Japanese
+                    <input type="radio" name="tl" value="ko">Korean
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="button" onclick="translateMessage()">Translate</button>
+                    <input type="reset" value="Reset" onclick="customReset()">
+                </td>
+            </tr>
+    </table>
+    </form>
+</body>
+</html>
