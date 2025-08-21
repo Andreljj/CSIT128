@@ -31,4 +31,5 @@ Build an HTML form with the following elements. The form must be within a table 
 * Target language: a radio button with Chinese, Japanese and Korean. Make Chinese as the default.
 * Submit button: the button is called "Translate". When it is clicked, it should invoke the google translate [https://translate.google.com](https://translate.google.com) to perform the translation of the content in the "Message" text area as described above.
 * Reset button: this will reset the content of all the elements.
-You are free to desing your own validation messages, but they must appear beside the corresponding HTML elements
+  
+You are free to design your own validation messages, but they must appear beside the corresponding HTML elements (i.e. no popup error message)
