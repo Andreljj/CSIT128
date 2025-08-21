@@ -20,27 +20,16 @@ links (“here”).
 
 **Part 3: HTML Form:**
 Build an HTML form with the following elements. The form must be within a table structure.
-- Name: a text box where the content contains no number but allow special character. The
-text box must not be empty.
-• Module code: a text box where the content must start with 3 lower case alphabets and
-follows by 3 digits. The 3 digits cannot start with a “0” (i.e. 012 is not allowed). This textbox
-can be empty.
-• Current date: a non-editable textbox and should be in the format as shown (e.g. 8 April 2024
-Monday 3:35 PM). The content is the current date or today’s date which will change every
-day.
-• Message: a text area with 3 rows and 20 columns. The default text is “Test 202404”. The text
-area cannot be empty.
-• Find: a text box for the user to key in text he/she wants to find.
-• Replace: a text box for the user to key in the replacement text. If the find text is empty, this
-element should be disable (i.e. user cannot key in anything here).
-• Find and Replace: This is a button, when click, it will go to the “Message” text area to find all
-the occurrence of the text shown in the “Find” text box and replaces all of them with the
-content shown in the “Replace” text box. After the replacement, a message showing the
-number of replacements must be displayed besides the button.
-• Source language: a selection list with English, Malay, Japanese. Use English as the default.
-• Target language: a radio button with Chinese, Japanese and Korean. Make Chinese as the
-default.
-• Submit button: the button is called “Translate”. When it is clicked, it should invoke the
-google translate https://translate.google.com to perform the translation of the content in
-the “Message” text area as described above.
-• Reset button: this will reset the content of all the elements.
+* Name: a text box where the content contains no number but allow special character. The text box must not be empty.
+* Module code: a text box where the content must start with 3 lower case alphabets and follows by 3 digits. The 3 digits cannot start with a "0" (i.e. 012 is not allowed). This textbox can be empty.
+* Current date: a non-editable textbox and should be in the format as shown (e.g. 8 April 2024 Monday 3:35 PM). The content is the current date or today's date which will change every day.
+
+* Message: a text area with 3 rows and 20 columns. The default text is "Test 202404". The text area cannot be empty.
+* Find: a text box for the user to key in text he/she wants to find.
+* Replace: a text box for the user to key in the replacement text. If the find text is empty, this element should be disable (i.e. user cannot key in anything here).
+* Find and Replace: This is a button, when the user goes to the "Message" text area to find all the occurrence of the text shown in the "Find" text box and replaces all of them with the content shown in the "Replace" text box. After the replacement, a message showing the number of replacements must be displayed besides the button.
+
+* Source language: a selection list with English, Malay, Japanese. Use English as the default.
+* Target language: a radio button with Chinese, Japanese and Korean. Make Chinese as the default.
+* Submit button: the button is called "Translate". When it is clicked, it should invoke the google translate [https://translate.google.com](https://translate.google.com) to perform the translation of the content in the "Message" text area as described above.
+* Reset button: this will reset the content of all the elements.
