@@ -17,3 +17,6 @@ links (“here”).
 - [Academic Consideration](https://www.uow.edu.au/student/admin/academic-consideration/portal/)
 - [Advisers](https://www.uow.edu.au/student/support-services/advisers/)
 - [Disability Services](https://www.uow.edu.au/student/support-services/disability/)
+
+**Part 3: HTML Form:**
+Build an HTML form with the following elements. The form must be within a table structure.
